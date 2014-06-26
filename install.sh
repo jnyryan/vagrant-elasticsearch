@@ -33,9 +33,9 @@ service nginx restart
 # Installing Elastic Search
 wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.2.1.deb
 dpkg -i elasticsearch-1.2.1.deb
-#cd /usr/share/elasticsearch
-#bin/plugin -install lmenezes/elasticsearch-kopf
-#cd -
+cd /usr/share/elasticsearch
+bin/plugin -install lmenezes/elasticsearch-kopf
+cd -
 
 echo Starting ES Service
 update-rc.d elasticsearch defaults 95 10
@@ -69,10 +69,17 @@ apt-get install logstash=1.4.1-1-bd507eb
 cp /vagrant/etc/logstash/10-syslog.conf /etc/logstash/conf.d/10-syslog.conf
 service logstash restart
 
+
+####################
+# Set up Test-Site 
+mkdir -p /var/www/test-site
+cp -R /vagrant/web/* /var/www/test-site 
+
 ####################
 # Testing 
 sleep 5
 curl http://localhost:9200
+curl http://localhost:9200/_plugin/kopf
 
 echo done
 
