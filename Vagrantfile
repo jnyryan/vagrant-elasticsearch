@@ -28,6 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # using a specific IP.
   #config.vm.network "private_network", type: "dhcp"
   config.vm.network :forwarded_port, host: 50080, guest: 80
+  config.vm.network :forwarded_port, host: 58080, guest: 8080
   config.vm.network :forwarded_port, host: 59200, guest: 9200
 
   # Create a public network, which generally matched to bridged network.
