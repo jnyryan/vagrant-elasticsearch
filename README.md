@@ -1,21 +1,29 @@
-vagrant-elasticsearch
+#vagrant-elasticsearch
 =================
 
+An all in one Virtual Machine set-up for loggging using ElasticSearch, Logstash and Kibana with a Test Web Site running under nGinx.
 
+## get up and running
 
+1. Install VagrantUp
 
-``` bash
+instructions at http://www.vagrantup.com/
 
-vagrant box add base http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-i386-vagrant-disk1.box
-vagrant init
-vagrant up
+2. Clone the Repository
 
-#locate ssh
-vagrant ssh-config | grep IdentityFile  | awk '{print $2}'
-ssh -i /some/dir/.vagrant.d/insecure_private_key -l vagrant -p 22 192.168.*.*
-ssh -i /Users/j/.vagrant.d/insecure_private_key -p 22 vagrant@192.168.192.36
+Download this repository to you local machine
 
-```
+3. Run VagrantUp
+	
+CD to the code you dopwnloaded and run
 
+	vagrant up
+
+This will download the Virtual Machine image, and run the install.sh to get all the components installed
+Give the it a few minutes to spin up.
+
+4. Play with the components
+
+	[http://localhost:58080](http://localhost:58080)
 
 
