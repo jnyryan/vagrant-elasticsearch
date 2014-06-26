@@ -43,12 +43,11 @@ update-rc.d elasticsearch defaults 95 10
 
 ####################
 # Install Kibana
-Download Kibana to your home directory with the following command:
 
 cd ~
 wget http://download.elasticsearch.org/kibana/kibana/kibana-latest.zip
 unzip kibana-latest.zip
-Open the Kibana configuration file for editing:
+	#Open the Kibana configuration file for editing:
 
 	#sudo vi ~/kibana-latest/config.js
 	#In the Kibana configuration file, find the line that specifies the elasticsearch, and replace the port number (9200 by default) with 80:
@@ -60,28 +59,45 @@ Open the Kibana configuration file for editing:
 
 mkdir -p /var/www/kibana
 cp -R ~/kibana-latest/* /var/www/kibana/
-cp /vagrant/etc/kibana/config.js /var/www/kibana/config.js 
-
+cp /vagrant/etc/kibana/config.js /var/www/kibana/config.js
 
 ####################
 # Installing logstash
-apt-get install logstash=1.4.1-1-bd507eb
-cp /vagrant/etc/logstash/10-syslog.conf /etc/logstash/conf.d/10-syslog.conf
-service logstash restart
+apt-get install -y logstash=1.4.1-1-bd507eb
+#cp /vagrant/etc/logstash/logstash.conf /etc/logstash/conf.d/logstash.conf
+#cp /vagrant/etc/logstash/logstash.conf /etc/logstash.conf
+#cp /vagrant/etc/logstash/logstash.conf /etc/logstash/server.conf
 
+sudo cp /vagrant/etc/logstash/indexer.conf /etc/logstash.conf
+sudo cp /vagrant/etc/logstash/indexer.conf /etc/logstash/indexer.conf
+sudo cp /vagrant/etc/logstash/indexer.conf /etc/logstash/server.conf
+sudo cp /vagrant/etc/logstash/indexer.conf /etc/logstash/conf.d/indexer.conf
+sudo cp /vagrant/etc/logstash/indexer.conf /etc/logstash/conf.d/logstash.conf
+
+
+#service logstash restart
+
+#curl -O https://download.elasticsearch.org/logstash/logstash/logstash-1.4.2.tar.gz
+#tar zxvf logstash-1.4.2.tar.gz
+#cp logstash-1.4.2 /opt/
+#~/logstash-1.4.2/bin/logstash -e 'input { stdin { } } output { stdout {codec => rubydebug} }'
+#~/logstash-1.4.2/bin/logstash -e 'input { stdin { } } output { elasticsearch { host => localhost } }'
+#~/logstash-1.4.2/bin/logstash -e 'input { file { path => "/var/log/nginx/**" start_position => beginning } } output { elasticsearch { host => localhost } }'
+
+
+#ß~/logstash-1.4.2/bin/logstash -e 'input { file { path => "/var/log/nginx/**" start_position => beginning } file { path => [ "/var/log/*.log", "/var/log/messages", "/var/log/syslog" ] } } output { elasticsearch { host => localhost } }'
+
+ #sudo ~/logstash-1.4.2/bin/logstash -e 'input { file { path => "/var/log/nginx/**" start_position => beginning } file { path => [ "/var/log/*.log", "/var/log/messages", "/var/log/syslog" ]  start_position => beginning } } output { elasticsearch { host => localhost } }'
 
 ####################
 # Set up Test-Site 
 mkdir -p /var/www/test-site
 cp -R /vagrant/web/* /var/www/test-site 
 
-####################
-# Testing 
-sleep 5
-curl http://localhost:9200
-curl http://localhost:9200/_plugin/kopf
 
 echo done
 
 ####################
 # https://www.digitalocean.com/community/tutorials/how-to-use-logstash-and-kibana-to-centralize-and-visualize-logs-on-ubuntu-14-04
+# https://gist.github.com/shadabahmed/5486949
+
