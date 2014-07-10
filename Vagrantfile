@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.vm.network "private_network", type: "dhcp"
   config.vm.network :forwarded_port, host: 50080, guest: 80 # Kibana
   config.vm.network :forwarded_port, host: 58080, guest: 8080 # test Site
-  config.vm.network :forwarded_port, host: 58888, guest: 8888 # test Site
+  config.vm.network :forwarded_port, host: 55043, guest: 5043 # logstash-forwarder
   config.vm.network :forwarded_port, host: 59200, guest: 9200 # Elastic Search
 
   # Create a public network, which generally matched to bridged network.
