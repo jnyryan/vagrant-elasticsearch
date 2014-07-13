@@ -1,4 +1,4 @@
-#!/bin/bash
+sudo apt-get install -y ruby1.9.1-dev#!/bin/bash
 
 ####################
 # Prerequisites
