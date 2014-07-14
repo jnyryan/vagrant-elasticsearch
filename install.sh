@@ -3,7 +3,6 @@ sudo apt-get install -y ruby1.9.1-dev#!/bin/bash
 ####################
 # Prerequisites
 
-cd ~
 add-apt-repository ppa:chris-lea/node.js
 #apt-get install -y oracle-java7-installer # for ORACLE Java
 # import the Elasticsearch public GPG key into apt
@@ -15,6 +14,11 @@ echo 'deb http://packages.elasticsearch.org/logstash/1.4/debian stable main' | s
 
 apt-get update
 apt-get install -y git curl make unzip
+
+#####################
+# Install redis
+apt-get install -y redis-server
+cp /vagrant/etc/redis/redis.conf /etc/redis/redis.conf
 
 #####################
 # Install nginx

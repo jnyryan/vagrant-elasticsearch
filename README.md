@@ -27,3 +27,6 @@ Give the it a few minutes to spin up.
 	[http://localhost:58080](http://localhost:58080)
 
 
+# References
+https://library.linode.com/databases/redis/ubuntu-12.04-precise-pangolin
+https://medium.com/devops-programming/shipping-nginx-access-logs-to-logstash-b01bd0876e82
