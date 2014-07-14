@@ -19,6 +19,7 @@ apt-get install -y git curl make unzip
 # Install redis
 apt-get install -y redis-server
 cp /vagrant/etc/redis/redis.conf /etc/redis/redis.conf
+/etc/init.d/redis-server start
 
 #####################
 # Install nginx
@@ -63,12 +64,13 @@ unzip kibana-latest.zip
 mkdir -p /var/www/kibana
 cp -R ~/kibana-latest/* /var/www/kibana/
 cp /vagrant/etc/kibana/config.js /var/www/kibana/config.js
+cd -
 
 ####################
 # Set up Test-Site 
 echo Installing Test Web Site
 mkdir -p /var/www/test-site
-cp -R /vagrant/web/* /var/www/test-site 
+cp -R /vagrant/web/* /var/www/test-site/
 
 ####################
 # Run Logstash
