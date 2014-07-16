@@ -22,16 +22,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, host: 50080, guest: 80,   auto_correct: true # Kibana
+  config.vm.network :forwarded_port, host: 56379, guest: 6379, auto_correct: true # redis
+  config.vm.network :forwarded_port, host: 55672, guest: 5672, auto_correct: true # redis
+  config.vm.network :forwarded_port, host: 58080, guest: 8080, auto_correct: true # test Site
+  config.vm.network :forwarded_port, host: 59200, guest: 9200, auto_correct: true # Elastic Search
+
+  config.vm.network :forwarded_port, guest: 15672, host: 15672, auto_correct: true 
+  config.vm.network :forwarded_port, guest: 4369, host: 4369,   auto_correct: true
+  config.vm.network :forwarded_port, guest: 5672, host: 5672,   auto_correct: true
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   #config.vm.network "private_network", type: "dhcp"
-  config.vm.network :forwarded_port, host: 50080, guest: 80 # Kibana
-  config.vm.network :forwarded_port, host: 58080, guest: 8080 # test Site
-  config.vm.network :forwarded_port, host: 55043, guest: 5043 # logstash-forwarder
-  config.vm.network :forwarded_port, host: 56379, guest: 6379 # redis
-  config.vm.network :forwarded_port, host: 59200, guest: 9200 # Elastic Search
-
+  
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.

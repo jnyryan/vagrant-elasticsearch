@@ -26,6 +26,15 @@ Give the it a few minutes to spin up.
 
 	[http://localhost:58080](http://localhost:58080)
 
+Cleanup
+
+``` bash
+sudo bash
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -a -q)
+exit
+```
 
 # References
 https://library.linode.com/databases/redis/ubuntu-12.04-precise-pangolin
