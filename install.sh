@@ -94,7 +94,7 @@ docker run -d -h rabbithost -p 5672:5672 -p 15672:15672 jnyryan/rabbitmq
 
 ####################
 # Run Logstash Manually
-#sudo /opt/logstash/bin/logstash -f /opt/logstash.conf
+#sudo /opt/logstash/bin/logstash -f /etc/logstash/conf.d/logstash.conf
 echo done
 
 #####################
