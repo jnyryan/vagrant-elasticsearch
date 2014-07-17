@@ -18,12 +18,6 @@ apt-get update
 apt-get install -y git curl make unzip
 
 #####################
-# Install redis
-#apt-get install -y redis-server
-#cp ${SRC}etc/redis/redis.conf /etc/redis/redis.conf
-#/etc/init.d/redis-server start
-
-#####################
 # Install docker
 sudo apt-get install -y docker.io
 sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker
@@ -33,8 +27,20 @@ sudo sed -i '$acomplete -F _docker docker' /etc/bash_completion.d/docker.io
 # Install nginx
 echo Installing nginx
 apt-get install -y nginx
-cp ${SRC}etc/nginx/nginx.conf /etc/nginx/sites-available/default
+
+cp ${SRC}etc/nginx/kibana.conf /etc/nginx/sites-available/kibana.conf
+ln -sf /etc/nginx/sites-available/kibana.conf /etc/nginx/sites-enabled/kibana.conf 
+
+cp ${SRC}etc/nginx/testsite.conf /etc/nginx/sites-available/testsite.conf
+ln -sf /etc/nginx/sites-available/testsite.conf /etc/nginx/sites-enabled/testsite.conf 
+
 service nginx restart
+
+####################
+# Set up Test-Site 
+echo Installing Test Web Site
+mkdir -p /var/www/test-site
+cp -R ${SRC}web/* /var/www/test-site/
 
 ####################
 # Install java
@@ -84,17 +90,16 @@ cd -
 docker pull jnyryan/rabbitmq
 docker run -d -h rabbithost -p 5672:5672 -p 15672:15672 jnyryan/rabbitmq
 
-
-####################
-# Set up Test-Site 
-echo Installing Test Web Site
-mkdir -p /var/www/test-site
-cp -R ${SRC}web/* /var/www/test-site/
-
 ####################
 # Run Logstash Manually
 #sudo /opt/logstash/bin/logstash -f /opt/logstash.conf
 echo done
+
+#####################
+# Install redis
+#apt-get install -y redis-server
+#cp ${SRC}etc/redis/redis.conf /etc/redis/redis.conf
+#/etc/init.d/redis-server start
 
 ####################
 # https://www.digitalocean.com/community/tutorials/how-to-use-logstash-and-kibana-to-centralize-and-visualize-logs-on-ubuntu-14-04
