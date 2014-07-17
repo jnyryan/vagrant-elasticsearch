@@ -15,7 +15,7 @@ echo 'deb http://packages.elasticsearch.org/elasticsearch/1.1/debian stable main
 echo 'deb http://packages.elasticsearch.org/logstash/1.4/debian stable main' | sudo tee /etc/apt/sources.list.d/logstash.list
 
 apt-get update
-apt-get install -y git curl make unzip
+apt-get install -y git curl make unzip htop
 
 ####################
 # Install java
