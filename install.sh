@@ -17,6 +17,13 @@ echo 'deb http://packages.elasticsearch.org/logstash/1.4/debian stable main' | s
 apt-get update
 apt-get install -y git curl make unzip
 
+####################
+# Install java
+echo Installing Java
+#apt-get -y install openjdk-7-jre-headless # for OPEN Java
+apt-get install -y oracle-java7-installer # for ORACLE Java
+java -version
+
 #####################
 # Install docker
 sudo apt-get install -y docker.io
@@ -34,6 +41,8 @@ ln -sf /etc/nginx/sites-available/kibana.conf /etc/nginx/sites-enabled/kibana.co
 cp ${SRC}etc/nginx/testsite.conf /etc/nginx/sites-available/testsite.conf
 ln -sf /etc/nginx/sites-available/testsite.conf /etc/nginx/sites-enabled/testsite.conf 
 
+rm /etc/nginx/sites-enabled/default
+
 service nginx restart
 
 ####################
@@ -41,13 +50,6 @@ service nginx restart
 echo Installing Test Web Site
 mkdir -p /var/www/test-site
 cp -R ${SRC}web/* /var/www/test-site/
-
-####################
-# Install java
-echo Installing Java
-#apt-get -y install openjdk-7-jre-headless # for OPEN Java
-apt-get install -y oracle-java7-installer # for ORACLE Java
-java -version
 
 ####################
 # Installing logstash
